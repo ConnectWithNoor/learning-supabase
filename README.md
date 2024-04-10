@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Learning how to use Supabase with NextJS
 
-## Getting Started
+![Preview](https://miro.medium.com/v2/resize:fit:720/format:webp/1*xOqCfciF90c8nH0HhMpapQ.png)
 
-First, run the development server:
+First, do the following:
+
+```js
+- add authentication providers in supabase dashboard.
+- fill .env.local file
+- configure lib/supabase/client
+- configure lib/supabase/server
+```
+
+then , run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Supabase Services Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Authentication
 
-## Learn More
+#### Project Features
 
-To learn more about Next.js, take a look at the following resources:
+- The project UI is incomplete but it has fully functional functionalities.
+- Password less authentication, A user can create an account using only the email, a confirmation email is sent to let user verify their email, and later a magic link is sent to login for that email. (using supabase server, server action)
+- OAuth (Google and Github) authentication (using supabase client)
+- Retreive user data on Navbar (client)
+- Signout user on Navbar (client)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Authentication Strategies used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- PasswordLess Authentication, with Email only (Magic Link)
+- OAuth (Google and Github)
 
-## Deploy on Vercel
+#### Useful resources for Supabase with NextJS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Made by [Noor Muhammad](https://www.linkedin.com/in/connectwithnoor)
