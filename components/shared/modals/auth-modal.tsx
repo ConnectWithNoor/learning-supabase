@@ -24,6 +24,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { registerWithEmailMagicLinkAction } from "@/actions/auth";
+import { Provider } from "@supabase/supabase-js";
 import { supabaseClient } from "@/lib/supabase/client";
 
 const AuthModal = () => {
@@ -44,6 +45,8 @@ const AuthModal = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Action uses supabase server
+
     const response = await registerWithEmailMagicLinkAction(values);
     if (response && response.error) {
       console.log("error while signin: ", response.error);
@@ -51,7 +54,21 @@ const AuthModal = () => {
     }
   }
 
-  async function githubAuth() {}
+  async function socialAuth(provider: Provider) {
+    // using supabase client
+    try {
+      const response = await supabaseClient.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: process.env.NEXT_PUBLIC_SUPABASE_OAUTH_REDIRECT_URL,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
 
   return (
     <Dialog open={isAuthModalOpen} onOpenChange={toggleAuthModal}>
@@ -60,8 +77,8 @@ const AuthModal = () => {
           <DialogTitle>Authenticate</DialogTitle>
         </DialogHeader>
 
-        <Button>GOOGLE</Button>
-        <Button onClick={githubAuth}>GITHUB</Button>
+        <Button onClick={() => socialAuth("google")}>GOOGLE</Button>
+        <Button onClick={() => socialAuth("github")}>GITHUB</Button>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

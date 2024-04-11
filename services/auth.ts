@@ -7,7 +7,7 @@ const registerWithEmailMagicLinkService = async (email: string) => {
     const response = await supabaseClient.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_MAGICLINK_REDIRECT_URL}`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_MAGICLINK_REDIRECT_URL}`,
       },
     });
 
