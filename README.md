@@ -28,7 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 #### Project Features
 
 - The project UI is incomplete but it has fully functional functionalities.
-- Password less authentication, A user can create an account using only the email, a confirmation email is sent to let user verify their email, and later a magic link is sent to login for that email. (using supabase server, server action)
+- Password less authentication, A user can create an account using only the email, a confirmation email is sent to let user verify their email (using supabase server, server action)
 - OAuth (Google and Github) authentication (using supabase client)
 - Retreive user data on Navbar (client)
 - Signout user on Navbar (client)
@@ -42,6 +42,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - [Authentication with NextJS SSR](https://www.youtube.com/watch?v=VVElr2n90KY)
 - [Supabase SSR package](https://supabase.com/docs/guides/auth/server-side/overview)
-- [How to Increase Supabase signup rate limit (3000 free emails / mo)](How to Increase Supabase signup rate limit (3000 free emails / mo))
+- [How to Increase Supabase signup rate limit 3000 free emails](https://medium.com/@techalchimiste/how-to-increase-supabase-signup-rate-limit-3000-emails-mo-261289882cf4)
 
 Made by [Noor Muhammad](https://www.linkedin.com/in/connectwithnoor)
