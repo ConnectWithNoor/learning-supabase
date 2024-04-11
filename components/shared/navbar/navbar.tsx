@@ -15,6 +15,12 @@ const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
+  const handleSignout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) console.error("Error logging out", error);
+    else setUser(null);
+  };
+
   useEffect(() => {
     // protect page using getSession in client components
     // protech page using getUser in server components
@@ -49,21 +55,33 @@ const Navbar = () => {
         </Link>
 
         <div className="flex items-center space-x-5 w-auto">
-          <Link
-            href="/profile"
-            className="block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700"
-          >
-            Profile
-          </Link>
+          {user && (
+            <>
+              <Link
+                href="/profile"
+                className="block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700"
+              >
+                Profile
+              </Link>
 
-          <p>{user?.user_metadata?.full_name}</p>
+              <p>
+                {user?.user_metadata?.full_name ||
+                  "User signed up with email magic link doesnt have details"}
+              </p>
 
-          <Button onClick={toggleCreateProfileModal} variant="outline">
-            Update Profile
-          </Button>
-          <Button onClick={toggleAuthModal} variant="destructive">
-            Auth
-          </Button>
+              <Button onClick={toggleCreateProfileModal} variant="outline">
+                Update Profile
+              </Button>
+              <Button onClick={handleSignout} variant="destructive">
+                Signout
+              </Button>
+            </>
+          )}
+          {!user && (
+            <Button onClick={toggleAuthModal} variant="destructive">
+              Sign in
+            </Button>
+          )}
         </div>
       </div>
     </nav>
