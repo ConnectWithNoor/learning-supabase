@@ -39,6 +39,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 #### Useful resources for Supabase with NextJS
 
--
+- [Authentication with NextJS SSR](https://www.youtube.com/watch?v=VVElr2n90KY)
 
 Made by [Noor Muhammad](https://www.linkedin.com/in/connectwithnoor)

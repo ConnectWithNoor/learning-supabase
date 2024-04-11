@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
 
-import { User } from "@/types/app";
+import { User } from "@/types/app-types";
 
 const UserCard: FC<{ userData: User | null }> = ({ userData }) => {
   return (

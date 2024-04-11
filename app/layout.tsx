@@ -3,12 +3,12 @@ import { Inter } from "next/font/google";
 
 import "@/styles/globals.css";
 import Navbar from "@/components/shared/navbar/navbar";
-import ModalsProvider from "@/components/providers/modals-provider";
+import ModalProvider from "@/providers/modals-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Learning Supabase",
+  title: "Learning Supabase with Next 14",
   description: "ConnectWithNoor",
 };
 
@@ -21,10 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main>
-          <ModalsProvider>
+          <ModalProvider>
             <Navbar />
             {children}
-          </ModalsProvider>
+          </ModalProvider>
         </main>
       </body>
     </html>
