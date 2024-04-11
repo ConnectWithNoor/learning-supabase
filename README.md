@@ -30,8 +30,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - The project UI is incomplete but it has fully functional functionalities.
 - Password less authentication, A user can create an account using only the email, a confirmation email is sent to let user verify their email (using supabase server, server action)
 - OAuth (Google and Github) authentication (using supabase client)
-- Retreive user data on Navbar (client)
+- Page protection example in Navbar (for protected pages)
 - Signout user on Navbar (client)
+- Middleware to check for cookies on every request, (this is to refresh expired Auth tokens and store them back to cookies and localstorage)
 
 #### Authentication Strategies used
 
