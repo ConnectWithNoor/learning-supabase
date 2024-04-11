@@ -1,3 +1,7 @@
+"us client";
+
+// https://supabase.com/docs/guides/auth/server-side/nextjs
+
 import { createBrowserClient } from "@supabase/ssr";
 
 const supabaseClient = createBrowserClient(

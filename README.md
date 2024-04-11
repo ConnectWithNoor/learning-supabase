@@ -6,6 +6,7 @@ First, do the following:
 
 ```js
 - add authentication providers in supabase dashboard.
+- in case of OAuth providers, add client and secret keys in supabase dashboard.
 - fill .env.local file
 - configure lib/supabase/client
 - configure lib/supabase/server
@@ -40,5 +41,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 #### Useful resources for Supabase with NextJS
 
 - [Authentication with NextJS SSR](https://www.youtube.com/watch?v=VVElr2n90KY)
+- [Supabase SSR package](https://supabase.com/docs/guides/auth/server-side/overview)
+- [How to Increase Supabase signup rate limit (3000 free emails / mo)](How to Increase Supabase signup rate limit (3000 free emails / mo))
 
 Made by [Noor Muhammad](https://www.linkedin.com/in/connectwithnoor)

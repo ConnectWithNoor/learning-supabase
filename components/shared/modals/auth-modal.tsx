@@ -23,6 +23,8 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
+import { registerWithEmailMagicLinkAction } from "@/actions/auth";
+import { supabaseClient } from "@/lib/supabase/client";
 
 const AuthModal = () => {
   const { isAuthModalOpen, toggleAuthModal } = useContext(AuthModalContext);
@@ -32,20 +34,22 @@ const AuthModal = () => {
       .string()
       .email()
       .min(5, { message: "Job title must be at least 2 characters" }),
-    password: z
-      .string()
-      .min(3, { message: "Password must at least be 3 characters" }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {}
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const response = await registerWithEmailMagicLinkAction(values);
+    if (response && response.error) {
+      console.log("error while signin: ", response.error);
+      alert(response.error);
+    }
+  }
 
   async function githubAuth() {}
 
@@ -71,21 +75,6 @@ const AuthModal = () => {
                     <Input placeholder="email" {...field} />
                   </FormControl>
                   <FormDescription>Please enter your email</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="password" {...field} />
-                  </FormControl>
-                  <FormDescription>Min 3 characters</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
