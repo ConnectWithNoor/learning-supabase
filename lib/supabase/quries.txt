@@ -1,0 +1,63 @@
+# Save the Authenticated users to Supabase Database
+
+1 - Go to SQL editor in supabase dashboard
+2 - Paste the following code (remove commends before pasting)
+
+```
+
+// to create a new table named users
+// id references to the supabase auth table (managed by supabase) https://supabase.com/docs/guides/auth/managing-user-data
+
+create table 
+  users(
+    id uuid references auth.users not null primary key on delete cascade,
+    email text unique not null,
+    full_name text,
+    avatar_url text
+  );
+
+// RLS is a Postgres feature that allows to create custom policies for the table to perform permitted actions(Select, update, delete etc)
+// https://supabase.com/docs/guides/auth/row-level-
+
+alter table
+  users enable row level security;
+
+// RLS policy to only allow a user to select(view) only their data
+
+create policy
+  "Can select only own user data." on users for
+select
+  using (auth.uid() = id );
+
+// RLS policy to only allow a user to update only their data
+
+create policy
+  "Can update only own user data." on users for
+update
+  using (auth.uid() = id );
+
+// a function to insert the newly Authenticated user data into supabase Database.
+// it checks if user doesn't have avatar url so it sets a default one (unplash).
+
+create 
+or replace function public.handle_new_user() returns trigger as $$
+begin
+  if new.raw_user_meta_data->>'avatar_url' is null or new.raw_user_meta_data->>'avatar_url' = '' then 
+    new.raw_user_meta_data = jsonb_set(raw_user_meta_data, '{avatar_url}', '"https://images.unsplash.com/photo-1622381355313-7e86da83e21f?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"' ::jsonb);
+  end if;
+
+  insert into public.users(id, email, full_name, avatar_url)
+  values (new.id, new.email, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
+  return new;
+end;
+$$ language plpgsql security definer;
+
+// a trigger that will run everytime a new user is created in Authenticatication table (managed by supabase)
+// this runs a upper created function as a trigger functionality
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row
+    execute procedure public.handle_new_user();
+
+```

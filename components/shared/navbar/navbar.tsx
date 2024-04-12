@@ -18,7 +18,9 @@ const Navbar = () => {
   const handleSignout = async () => {
     const { error } = await supabaseClient.auth.signOut();
     if (error) console.error("Error logging out", error);
-    else setUser(null);
+    else {
+      setUser(null);
+    }
   };
 
   useEffect(() => {

@@ -5,7 +5,19 @@ export default async function Home() {
   const userData = await getUserData();
 
   if (!userData) {
-    // throw new error
+    return (
+      <div className="grid place-content-center h-[80vh]">
+        <p className="text-red-500">An error occured</p>
+      </div>
+    );
+  }
+
+  if (userData && "error" in userData) {
+    return (
+      <div className="grid place-content-center h-[80vh]">
+        <p className="text-red-500">{userData.error}</p>
+      </div>
+    );
   }
 
   return (

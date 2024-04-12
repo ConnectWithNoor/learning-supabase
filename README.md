@@ -33,6 +33,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Page protection example in Navbar (for protected pages)
 - Signout user on Navbar (client)
 - Middleware to check for cookies on every request, (this is to refresh expired Auth tokens and store them back to cookies and localstorage)
+- Save the authenticated users to Supabase Database (queries are in lib/supabase/queries.txt)
+- Sync the supabase types to our project types (this will create types/supabase)
 
 #### Authentication Strategies used
 
@@ -44,5 +46,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Authentication with NextJS SSR](https://www.youtube.com/watch?v=VVElr2n90KY)
 - [Supabase SSR package](https://supabase.com/docs/guides/auth/server-side/overview)
 - [How to Increase Supabase signup rate limit 3000 free emails](https://medium.com/@techalchimiste/how-to-increase-supabase-signup-rate-limit-3000-emails-mo-261289882cf4)
+- [Syncing supabase type to project types](https://supabase.com/docs/guides/api/rest/generating-types)
 
 Made by [Noor Muhammad](https://www.linkedin.com/in/connectwithnoor)
