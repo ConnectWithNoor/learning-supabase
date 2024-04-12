@@ -33,13 +33,20 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Page protection example in Navbar (for protected pages)
 - Signout user on Navbar (client)
 - Middleware to check for cookies on every request, (this is to refresh expired Auth tokens and store them back to cookies and localstorage)
-- Save the authenticated users to Supabase Database (queries are in lib/supabase/queries.txt)
-- Sync the supabase types to our project types (this will create types/supabase)
+- Save the authenticated users to Supabase Database (queries & policies are in lib/supabase/queries.txt) (added more columns in supabase dashboard, image attached)
+- Sync the supabase types to our project types (this will create types/, check resources)
+- supabase storage to upload user profile pictures. (created it's policies on supabase dashboard, image attached)
+- Fetch complete path of storage items using server actions (in profile/page)
 
 #### Authentication Strategies used
 
 - PasswordLess Authentication, with Email only (Magic Link)
 - OAuth (Google and Github)
+
+#### Reference Images
+
+![update_user_schema](./public/update_user_schema.png)
+![images_bucket_policies](./public/images_bucket.png)
 
 #### Useful resources for Supabase with NextJS
 
