@@ -44,6 +44,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - PasswordLess Authentication, with Email only (Magic Link)
 - OAuth (Google and Github)
 
+#### Known issues of the project
+
+- Signin with email will throw an error, this is because we have set a db function "handle_new_user" in supabase which will add the newly auth user details in users table. Since the user signed up with email doesn't have required info, the function fails (while authentication works as it should be). To fix this, redirect to a profile signup form after user verifies the email and then save the user details to the table.
+
 #### Reference Images
 
 ![update_user_schema](./public/update_user_schema.png)
