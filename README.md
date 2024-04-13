@@ -7,6 +7,7 @@ First, do the following:
 ```js
 - add authentication providers in supabase dashboard.
 - in case of OAuth providers, add client and secret keys in supabase dashboard.
+- add site URL to localhost:3000 in URL configuration under Authentication in supabase dashboard. (make sure to change it after deploy)
 - fill .env.local file
 - configure lib/supabase/client
 - configure lib/supabase/server
