@@ -30,4 +30,19 @@ const getUserData = async (): Promise<User | Error | null> => {
   return data ? data[0] : null;
 };
 
-export default getUserData;
+const updateUsersSkills = async (userId: string, skill: string) => {
+  const supabase = await supabaseServer();
+
+  // update the user skills in db using RPC named add_skill
+  const { data: formResponse, error: formError } = await supabase.rpc(
+    "add_skill",
+    {
+      user_id: userId,
+      new_skill: skill,
+    }
+  );
+
+  return { formResponse, formError };
+};
+
+export { getUserData, updateUsersSkills };

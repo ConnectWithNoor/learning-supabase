@@ -37,6 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Sync the supabase types to our project types (this will create types/, check resources)
 - supabase storage to upload user profile pictures. (created it's policies on supabase dashboard, image attached)
 - Fetch complete path of storage items using server actions (in profile/page)
+- created a db function (queries & policies are in lib/supabase/queries.txt) & use it to update user skills using supabase RPC (in profile/page)
 
 #### Authentication Strategies used
 

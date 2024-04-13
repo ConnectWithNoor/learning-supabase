@@ -1,4 +1,4 @@
-import getUserData from "@/actions/user";
+import { getUserData } from "@/actions/user";
 import UserCard from "@/components/shared/user/user-card";
 
 export default async function Home() {

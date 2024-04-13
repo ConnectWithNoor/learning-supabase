@@ -1,10 +1,9 @@
 import { getUserLogoImageAction } from "@/actions/storage";
-import getUserData from "@/actions/user";
+import { getUserData, updateUsersSkills } from "@/actions/user";
 import { Button } from "@/components/ui/button";
+import { revalidatePath } from "next/cache";
 
 const Profile = async () => {
-  const handleAddSkill = async (formData: FormData) => {};
-
   const userData = await getUserData();
 
   if (!userData) {
@@ -27,6 +26,29 @@ const Profile = async () => {
   const userLogoPath = await getUserLogoImageAction({
     userLogoName: userData.logo,
   });
+
+  const handleAddSkill = async (formData: FormData) => {
+    "use server";
+
+    const skill = formData.get("skill") as string;
+
+    if (!skill) return;
+
+    const { formResponse, formError } = await updateUsersSkills(
+      userData.id,
+      skill
+    );
+
+    if (formError) {
+      alert(formError.message);
+      return;
+    }
+
+    // response will log null because we returned void from the "add_skill" supabase database functions
+    // console.log(formResponse);
+    formData.set("skill", "");
+    revalidatePath("/profile");
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -59,9 +81,9 @@ const Profile = async () => {
               </div>
               <hr className="my-6 border-t border-gray-300" />
               <div className="flex flex-col">
-                <form className="flex">
+                <form className="flex mb-4" action={handleAddSkill}>
                   <input
-                    className="border mr-2 rounded-md border-black px-3 py-2"
+                    className="border mr-2 rounded-md border-black px-3 py-2 w-full"
                     type="text"
                     name="skill"
                     placeholder="skill"
@@ -72,11 +94,11 @@ const Profile = async () => {
                   Skills
                 </span>
                 <ul>
-                  <li className="mb-2">JavaScript</li>
-                  <li className="mb-2">React</li>
-                  <li className="mb-2">Node.js</li>
-                  <li className="mb-2">HTML/CSS</li>
-                  <li className="mb-2">Tailwind CSS</li>
+                  {userData.skills.map((skill, index) => (
+                    <li className="mb-2" key={index}>
+                      {skill}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

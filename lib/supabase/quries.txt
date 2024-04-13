@@ -61,3 +61,17 @@ create trigger on_auth_user_created
     execute procedure public.handle_new_user();
 
 ```
+
+# A function to add a new skill to a user's skills array in the users table
+
+```
+create
+  or replace function add_skill (user_id uuid, new_skill text) returns void as $$
+  begin
+    update users
+    set skills = skills || array[new_skill]
+    where id = user_id;
+  end;
+  $$ language plpgsql;
+
+```
